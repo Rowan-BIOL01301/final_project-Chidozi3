@@ -1,8 +1,11 @@
 ---
 title: "Final Project"
 subtitle: "Data Science for Biologists, Spring 2021"
-author: "Your name goes here"
-output: html_document
+author: "Chidozie Chukwumba"
+output:
+   rmarkdown::html_document:
+    theme: cerulean
+    highlight: breezedark
 editor_options: 
   chunk_output_type: console
 ---
@@ -12,62 +15,127 @@ editor_options:
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = TRUE, include = TRUE)
 
 # Load all libraries you use HERE:
+library(tidyverse)
 ```
 
 <br><br>
 
-## Introduction
+### *I chose this dataset because I wish to learn how plastics are adversely affecting the environment and what measures are being taken combat this issue. This dataset will help me understand the different types of plastics and what I, as an individual, can do to assist in this noble cause.* *[plastics dataset](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md)*
 
 ```{r read-examine-data}
-
+plastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')
+dplyr::glimpse(plastics)
 ```
 
 <br><br>
 
 ## Question 1
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Which two parent companies produce the most plastics in Argentina?
 
 ### Methods
+```{r United_States_plastics}
+
+plastics %>%
+  filter(country == "Argentina") %>%
+  slice(1:10) %>%
+   ggplot(aes(x = grand_total,
+              y = parent_company)) +
+  geom_col(color = "grey0",
+           fill = "cyan") +
+  theme_classic() +
+  labs(x = "Total (plastics)",
+       y = "Parent Company")
+ 
+```
+
 
 ### Answer
 
-Replace this text with your answer to your question.
+**Unbranded and Grand Total**
 
 
 <br><br>
 
 ## Question 2
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Does The Coca-Cola Company produce more plastics than PepsiCo in the United States?
 
 ### Methods
+```{r United_States_parent_company}
+plastics %>%
+  filter(country == "United States of America") %>%
+  slice(1:10) %>%
+  distinct() %>%
+   ggplot(aes(x = grand_total,
+              y = parent_company)) +
+  geom_col(color = "red2",
+           fill = "dodgerblue2") + 
+  labs(x = "Total (plastics)",
+       y = "Parent Company") + 
+  theme_classic() 
+
+```
+
 
 ### Answer
 
-Replace this text with your answer to your question.
+**No, they do not.**
 
 <br><br>
 
 ## Question 3
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Which parent company produced the most plastics in the China?
+
 
 ### Methods
+```{r China_plastics}
+
+plastics %>%
+  filter(country == "China") %>%
+  slice(1:10) %>%
+  distinct() %>%
+   ggplot(aes(x = grand_total,
+              y = parent_company)) +
+  geom_col(color = "gold",
+           fill = "firebrick2") +
+  theme_classic() +
+  labs(x = "Total (plastics)",
+       y = "Parent Company")
+       
+
+  
+```
 
 ### Answer
 
-Replace this text with your answer to your question.
+**Grand Total**
 
 
 <br><br>
 
 ## Question 4
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Does the parent company, Grand Total, produce the most plastics in India?
 
 ### Methods
+```{r India_plastics}
+
+plastics %>%
+  filter(country == "India") %>%
+  slice(1:10) %>%
+   ggplot(aes(x = grand_total,
+              y = parent_company)) +
+  geom_col(color = "goldenrod2",
+           fill = "chartreuse2") +
+  theme_classic() +
+  labs(x = "Total (plastics)",
+       y = "Parent Company") 
+  
+```
+
 
 ### Answer
 
-Replace this text with your answer to your question.
+**Yes**
